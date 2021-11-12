@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jawspankration-dev-222906-authRole",
+      "UnauthRoleArn": "arn:aws:iam::623357820778:role/amplify-jawspankration-dev-222906-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::623357820778:role/amplify-jawspankration-dev-222906-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-jawspankration-dev-222906-deployment",
+      "UnauthRoleName": "amplify-jawspankration-dev-222906-unauthRole",
+      "StackName": "amplify-jawspankration-dev-222906",
+      "StackId": "arn:aws:cloudformation:us-east-1:623357820778:stack/amplify-jawspankration-dev-222906/9250e7e0-43ff-11ec-ab08-12d4a3d4b1c5",
+      "AmplifyAppId": "d2926qm28yjk71"
+    }
+  }
+}
