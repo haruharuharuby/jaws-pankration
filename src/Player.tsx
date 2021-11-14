@@ -1,11 +1,28 @@
-import React, {useEffect, useRef } from 'react'
+import React, {CSSProperties, useEffect, useRef } from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
+
+function trigger(metadata: string) {
+  const el = document.querySelector('.metadata')
+  // @ts-ignore
+  el.innerHTML = metadata
+  
+  // @ts-ignore
+  document.querySelector("#bgm1").play()
+}
 
 const Player = () => {
   const playerRef = useRef()
 
   useEffect(() =>  {
+    const audio1 = document.createElement("audio")
+    audio1.id = 'bgm1'
+    audio1.preload = ''
+    const source = document.createElement("source")
+    source.src = 'https://resources.hugtech.io/sound/audience.mp3'
+    audio1.appendChild(source)
+    document.body.appendChild(audio1)
+
     const script = document.createElement("script");
     script.src =
       "https://player.live-video.net/1.2.0/amazon-ivs-videojs-tech.min.js";
@@ -28,6 +45,19 @@ const Player = () => {
         }
       );
 
+      // @ts-ignore
+      const ivsPlayer = player.getIVSPlayer();
+      // Log and display timed metadata
+      // @ts-ignore
+      ivsPlayer.addEventListener('PlayerTextMetadataCue', (cue) => {
+      const metadataText = cue.text;
+      const position = ivsPlayer.getPosition().toFixed(2);
+      console.log(
+        `Player Event - TEXT_METADATA_CUE: "${metadataText}". Observed ${position}s after playback started.`
+      );
+      trigger(metadataText);
+    });
+
       //@ts-ignore
       playerRef.current = player;
     })
@@ -39,8 +69,14 @@ const Player = () => {
     };
   }, [])
 
+  const metadataStyle: CSSProperties = {
+    zIndex: 99,
+    fontSize: 50,
+    color: 'white'
+  }
   return (
     <div>
+      <div className='metadata' style={metadataStyle}></div>
       <video
         id="amazon-ivs-videojs"
         className="video-js vjs-4-3 vjs-big-play-centered"
