@@ -32,7 +32,7 @@ const Player = () => {
   useEffect(() =>  {
     const audio1 = document.createElement("audio")
     audio1.id = 'bgm1'
-    audio1.preload = ''
+    audio1.preload = "auto"
     const source = document.createElement("source")
     source.src = 'https://resources.hugtech.io/sound/audience.mp3'
     audio1.appendChild(source)
