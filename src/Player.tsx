@@ -2,6 +2,15 @@ import React, {CSSProperties, useEffect, useRef } from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
+function endEffect() {
+  const n = document.querySelector("main");
+  if (n) {
+    n.style.visibility = "hidden";
+    // @ts-ignore
+    document.querySelector("#bgm1").pause()
+  }
+}
+
 function trigger(metadata: string) {
   const el = document.querySelector('.metadata')
   // @ts-ignore
@@ -9,6 +18,12 @@ function trigger(metadata: string) {
   
   // @ts-ignore
   document.querySelector("#bgm1").play()
+  const n = document.querySelector("main");
+  console.log(n);
+  if (n) {
+    n.style.visibility = "visible";
+    setTimeout(endEffect, 5000)
+  }
 }
 
 const Player = () => {
@@ -23,11 +38,23 @@ const Player = () => {
     audio1.appendChild(source)
     document.body.appendChild(audio1)
 
+    const p5js = document.createElement("script")
+    p5js.src = 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js'
+    document.body.appendChild(p5js)
+    const effect1 = document.createElement("script")
+    effect1.src = 'https://resources.hugtech.io/js/fuhahahahahaha.js'
+    document.body.appendChild(effect1)
+
     const script = document.createElement("script");
     script.src =
       "https://player.live-video.net/1.2.0/amazon-ivs-videojs-tech.min.js";
     document.body.appendChild(script);
 
+    const css = document.createElement("link");
+    css.rel = "stylesheet"
+    css.href = "https://resources.hugtech.io/stylesheets/p5js.css"
+    document.head.appendChild(css)
+  
     script.addEventListener("load", () => {
       const PLAYBACK_URL = 'https://ea1c51b185e6.us-east-1.playback.live-video.net/api/video/v1/us-east-1.623357820778.channel.E4ERzgPEOY2t.m3u8'
       // @ts-ignore
