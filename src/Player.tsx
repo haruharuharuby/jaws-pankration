@@ -3,8 +3,9 @@ import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
 function endEffect() {
-  const n = document.querySelector("main");
+  const n = document.querySelector("#effect");
   if (n) {
+    // @ts-ignore
     n.style.visibility = "hidden";
     // @ts-ignore
     document.querySelector("#bgm1").pause()
@@ -15,14 +16,18 @@ function trigger(metadata: string) {
   const el = document.querySelector('.metadata')
   // @ts-ignore
   el.innerHTML = metadata
-  
-  // @ts-ignore
-  document.querySelector("#bgm1").play()
-  const n = document.querySelector("main");
-  console.log(n);
-  if (n) {
-    n.style.visibility = "visible";
-    setTimeout(endEffect, 5000)
+  const d = JSON.parse(metadata)
+  if (d.effect === "givemecheers") {
+    const n = document.querySelector("#effect")
+    if (n) {
+      // @ts-ignore
+      n.style.visibility = "visible";
+      setTimeout(endEffect, 5000)
+      // @ts-ignore
+      document.querySelector("#bgm1").play()
+      // @ts-ignore
+      new p5(give_me_cheers, n);
+    }
   }
 }
 
@@ -112,6 +117,7 @@ const Player = () => {
         playsInline
         muted
       ></video>
+      <div id='effect'></div>
     </div>
   );
 }
